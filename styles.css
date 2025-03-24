@@ -1,0 +1,162 @@
+body {
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Dancing Script', cursive;
+    overflow: hidden;
+    transition: background 1s ease;
+}
+
+.scene {
+    text-align: center;
+    color: #fff;
+    position: relative;
+    z-index: 1;
+}
+
+.title {
+    font-size: 3em;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    opacity: 0;
+    animation: fadeIn 1s ease-in-out forwards;
+}
+
+.text {
+    font-size: 1.5em;
+    margin: 20px;
+    max-width: 600px;
+    opacity: 0;
+    animation: fadeIn 1s ease-in-out forwards;
+    animation-delay: 0.5s;
+}
+
+.click-to-continue {
+    font-size: 1em;
+    margin-top: 20px;
+    opacity: 0.7;
+    animation: pulse 2s infinite;
+}
+
+.heart {
+    position: absolute;
+    background: var(--heart-color, #ff6b6b);
+    transform: rotate(-45deg);
+    animation: float 6s infinite;
+    box-shadow: 0 0 10px var(--heart-color, #ff6b6b),
+                0 20px 0 -10px var(--heart-color, #ff6b6b),
+                0 40px 0 -20px var(--heart-color, #ff6b6b);
+    z-index: 2;
+}
+
+.heart::before,
+.heart::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: var(--heart-color, #ff6b6b);
+    border-radius: 50%;
+    box-shadow: 0 0 10px var(--heart-color, #ff6b6b);
+}
+
+.heart::before {
+    top: -50%;
+    left: 0;
+}
+
+.heart::after {
+    left: 50%;
+    top: 0;
+}
+
+.firefly {
+    position: absolute;
+    background: radial-gradient(circle, hsl(var(--firefly-hue), 100%, 80%), transparent);
+    box-shadow: 0 0 5px 2px hsl(var(--firefly-hue), 100%, 80%);
+    border-radius: 50%;
+    animation: 
+        flicker var(--flicker-speed) infinite ease-in-out,
+        wander var(--wander-speed) infinite ease-in-out;
+    z-index: 0;
+}
+
+.butterfly {
+    position: absolute;
+    left: -50px;
+    background: url('butterfly.png') no-repeat center/contain;
+    animation: fly 8s linear forwards;
+    z-index: 0;
+}
+
+.mute-toggle {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    padding: 5px 10px;
+    font-family: 'Arial', sans-serif;
+    font-size: 0.9em;
+    background: rgba(255, 255, 255, 0.2);
+    border: none;
+    border-radius: 5px;
+    color: #fff;
+    cursor: pointer;
+    z-index: 3;
+}
+
+.mute-toggle:hover {
+    background: rgba(255, 255, 255, 0.4);
+}
+
+@keyframes fadeIn {
+    0% { opacity: 0; transform: translateY(20px); }
+    100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes float {
+    0% {
+        transform: translateY(0) rotate(-45deg) scale(1);
+        opacity: 1;
+    }
+    50% {
+        transform: translateY(-50vh) rotate(-45deg) scale(1.2);
+        opacity: 0.8;
+    }
+    100% {
+        transform: translateY(-100vh) rotate(-45deg) scale(1);
+        opacity: 0;
+    }
+}
+
+@keyframes pulse {
+    0% { opacity: 0.7; }
+    50% { opacity: 1; }
+    100% { opacity: 0.7; }
+}
+
+@keyframes flicker {
+    0% { opacity: 0.2; transform: scale(0.8); }
+    20% { opacity: 1; transform: scale(1.2); }
+    40% { opacity: 0.5; transform: scale(0.9); }
+    60% { opacity: 1; transform: scale(1.1); }
+    80% { opacity: 0.4; transform: scale(0.8); }
+    100% { opacity: 0.2; transform: scale(0.8); }
+}
+
+@keyframes wander {
+    0% { transform: translate(0, 0); }
+    20% { transform: translate(var(--wander-x1), var(--wander-y1)); }
+    40% { transform: translate(var(--wander-x2), var(--wander-y2)); }
+    60% { transform: translate(var(--wander-x3), var(--wander-y3)); }
+    80% { transform: translate(var(--wander-x4), var(--wander-y4)); }
+    100% { transform: translate(0, 0); }
+}
+
+@keyframes fly {
+    0% { transform: translateX(0) translateY(0); }
+    25% { transform: translateX(25vw) translateY(-20px); }
+    50% { transform: translateX(50vw) translateY(0); }
+    75% { transform: translateX(75vw) translateY(20px); }
+    100% { transform: translateX(calc(100vw + 50px)) translateY(0); }
+}
