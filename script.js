@@ -41,6 +41,7 @@ function toggleMute() {
         muteToggle.textContent = 'Mute';
     }
 }
+toggleMute();
 
 // Toggle mute/unmute on button click
 muteToggle.addEventListener('click', toggleMute);
